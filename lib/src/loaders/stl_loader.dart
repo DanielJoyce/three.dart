@@ -42,7 +42,7 @@ class STLLoader extends Loader {
     }else{
       data =(resp as Uint8List);
     }
-    var geom = _isBinary(data) ? _parseBinary(data.buffer) : _parseASCII(new String.fromCharCodes(data));
+    var geom = isBinary(data) ? parseBinary(data.buffer) : parseASCII(new String.fromCharCodes(data));
     return geom;
   }
 
@@ -50,7 +50,7 @@ class STLLoader extends Loader {
    * UINT8[80] – Header
    * UINT32 – Number of triangles
    */
-  bool _isBinary(Uint8List bytes) {
+  bool isBinary(Uint8List bytes) {
 
     var data = new ByteData.view(bytes.buffer);
 
@@ -71,7 +71,7 @@ class STLLoader extends Loader {
    * UINT16 – Attribute byte count
    * end
    */
-  Geometry _parseBinary(ByteBuffer bytes) {
+  Geometry parseBinary(ByteBuffer bytes) {
 
     var data = new ByteData.view(bytes),
         n_faces = data.getUint32(80, Endianness.LITTLE_ENDIAN),
@@ -108,7 +108,7 @@ class STLLoader extends Loader {
 
   }
 
-  Geometry _parseASCII(data) {
+  Geometry parseASCII(data) {
 
     var geometry = new Geometry();
 
