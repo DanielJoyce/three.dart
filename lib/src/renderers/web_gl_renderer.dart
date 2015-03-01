@@ -5994,7 +5994,7 @@ class WebGLRenderer implements Renderer {
 
       color = light.color;
 
-      if ((light is DirectionalLight) || (light is SpotLight) || (light is PointLight)) {
+      if ((light is DirectionalLight) || (light is SpotLight) || (light is PointLight) || (light is HemisphereLight)) {
         intensity = (light as dynamic).intensity;
         distance = (light as dynamic).distance;
       }
@@ -6145,7 +6145,7 @@ class WebGLRenderer implements Renderer {
         spotLength += 1;
 
       } else if (light is HemisphereLight) {
-
+        
         hemiCount += 1;
 
         if (!light.visible) continue;
