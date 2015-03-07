@@ -322,41 +322,7 @@ class Geometry extends Object with WebGLGeometry {
   /// Computes bounding box of the geometry, updating Geometry.boundingBox.
   void computeBoundingBox() {
     if (boundingBox == null) {
-      boundingBox = new BoundingBox(min: new Vector3.zero(), max: new Vector3.zero());
-    }
-
-    if (vertices.length > 0) {
-      Vector3 position,
-          firstPosition = vertices[0];
-
-      boundingBox.min.setFrom(firstPosition);
-      boundingBox.max.setFrom(firstPosition);
-
-      Vector3 min = boundingBox.min,
-          max = boundingBox.max;
-
-      num vl = vertices.length;
-      for (int v = 1; v < vl; v++) {
-        position = vertices[v];
-
-        if (position.x < min.x) {
-          min.x = position.x;
-        } else if (position.x > max.x) {
-          max.x = position.x;
-        }
-
-        if (position.y < min.y) {
-          min.y = position.y;
-        } else if (position.y > max.y) {
-          max.y = position.y;
-        }
-
-        if (position.z < min.z) {
-          min.z = position.z;
-        } else if (position.z > max.z) {
-          max.z = position.z;
-        }
-      }
+      boundingBox = new BoundingBox.fromPoints(this.vertices);
     }
   }
 
